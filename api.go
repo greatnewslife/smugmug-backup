@@ -37,17 +37,23 @@ func (w *Worker) userAlbumsURI() string {
 	return u.Response.User.Uris.UserAlbums.URI
 }
 
+//TODO HERE
 // albums make multiple calls to obtain the full list of user albums. It calls the albums endpoint
 // unless the "NextPage" value in the response is empty
 func (w *Worker) albums(firstURI string) ([]album, error) {
 	uri := firstURI
 	var albums []album
 	for uri != "" {
+		var noError bool = true
 		var a albumsResponse
+		uri = uri + "?count=1"
 		if err := w.req.get(uri, &a); err != nil {
-			return albums, fmt.Errorf("Error getting albums from %s. Error: %v", uri, err)
+			//return albums, fmt.Errorf("Error getting albums from %s. Error: %v", uri, err)
+			noError = false
 		}
-		albums = append(albums, a.Response.Album...)
+		if noError == true {
+			albums = append(albums, a.Response.Album...)
+		}
 		uri = a.Response.Pages.NextPage
 	}
 	return albums, nil
