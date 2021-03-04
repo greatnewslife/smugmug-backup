@@ -1,6 +1,12 @@
 # SmugMug backup
 ### This fork handles the case of receiving a 404 response from SmugMug caused by an indexing bug on their end.
 
+sudo docker run -d \
+  -it \
+  --name test \
+  --mount type=bind,source=/content,target=/content \
+  smugmug-dl:latest
+
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/tommyblue/smugmug-backup)](https://pkg.go.dev/github.com/tommyblue/smugmug-backup) ![Go](https://github.com/tommyblue/smugmug-backup/workflows/Go/badge.svg)
 
 Makes a full backup of a [SmugMug](https://www.smugmug.com/) account (images and videos
