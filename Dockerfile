@@ -23,7 +23,7 @@ ADD https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz ./go.tar.gz
 RUN echo "b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552 go.tar.gz" | sha256sum -c - && \
     tar -C /usr/local -xzf go.tar.gz && \
     rm ./go.tar.gz
-
+RUN mkdir /content
 ADD . $APP
 WORKDIR $APP
 RUN go build -mod=vendor -i -v -o $GOBIN/smugmug-backup ./cmd/smugmug-backup/
